@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name="tix_event")
 public class Event {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private int id;
     @Column(name = "title")

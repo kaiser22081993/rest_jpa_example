@@ -1,6 +1,6 @@
 package example;
 
-import com.sun.jersey.api.NotFoundException;
+
 
 import javax.inject.Inject;
 import javax.naming.NamingException;
@@ -24,9 +24,6 @@ public class EventResource {
     @Inject
     private EventDao eventDao;
 
-/*    public EventResource(){
-        eventDao = new EventDao();
-    }*/
     @GET
     @Produces("application/xml")
     public List<Event> getAllEvents() {
@@ -43,6 +40,7 @@ public class EventResource {
         return e;
     }
     @POST
+    @Consumes("application/xml")
     public Response insertEvent(Event t)  {
         eventDao.create(t);
         URI loc = UriBuilder.fromResource(EventResource.class).path("{id}").build(t.getId());

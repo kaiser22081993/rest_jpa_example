@@ -7,7 +7,7 @@
             <property name="hibernate.connection.driver_class" value="org.sqlite.JDBC"/>
             <property name="hibernate.connection.username" value=""/>
             <property name="hibernate.connection.password" value=""/>
-            <property name="hibernate.connection.url" value="jdbc:sqlite:D:/jpa/rest_jpa_example/src/main/resources/test.db"/>
+            <property name="hibernate.connection.url" value="jdbc:sqlite:C:/fabrika/rest_jpa_example/src/main/resources/test.db"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
         </properties>
     </persistence-unit>

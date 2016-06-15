@@ -16,7 +16,7 @@ import java.util.OptionalInt;
  */
 
 public class DaoTest {
-
+    @Test
     public void crudTest() throws NotFoundException {
         EventDao dao = new EventDao();
 
@@ -35,4 +35,13 @@ public class DaoTest {
         dao.delete(e.getId());
 
     }
+    @Test
+    public void hibernateFuncTest(){
+        EntityManager em = Persistence.createEntityManagerFactory("Tix").createEntityManager();
+        Event e = em.find(Event.class,1);
+        System.out.println(e);
+
+
+    }
+
 }

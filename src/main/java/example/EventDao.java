@@ -2,6 +2,8 @@ package example;
 
 
 
+import org.hibernate.Session;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
@@ -11,9 +13,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-/**
- * Created by user1 on 15.06.2016.
- */
+
 @ApplicationScoped
 public class EventDao {
 
@@ -56,6 +56,8 @@ public class EventDao {
     }
 
     public void delete(int id) {
+        manager.getTransaction().begin();
         manager.remove(manager.find(Event.class,id));
+        manager.getTransaction().commit();
     }
 }
