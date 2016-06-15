@@ -1,17 +1,18 @@
 package example;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  * Created by user1 on 09.06.2016.
  */
 @Entity
+@XmlRootElement
 @Table(name="tix_event")
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
     @Column(name = "id")
     private int id;
     @Column(name = "title")
