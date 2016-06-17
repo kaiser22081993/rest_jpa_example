@@ -8,9 +8,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
-/**
- * Created by user1 on 17.06.2016.
- */
+
 @Path("/loc")
 public class ResourceLocator {
 

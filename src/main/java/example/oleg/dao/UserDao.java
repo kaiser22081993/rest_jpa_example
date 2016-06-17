@@ -8,30 +8,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.logging.Logger;
 
-/**
- * Created by user1 on 17.06.2016.
- */
+
 @ApplicationScoped
 public class UserDao implements DaoInterface2<User> {
 
-    private ConcurrentHashMap<Integer, User> db;
-    private AtomicInteger countId;
+    private static ConcurrentHashMap<Integer, User> db  = new ConcurrentHashMap<>();
+    Logger LOG = Logger.getLogger(UserDao.class.getSimpleName());
 
-    @Override
     @PostConstruct
     public void init() {
-        db = new ConcurrentHashMap<>();
-        countId = new AtomicInteger(0);
-        int id = countId.incrementAndGet();
-        User u = new User(id, "Oleh", "Email");
-        db.put(id, u);
+        User u = new User(0, "Oleh", "Email");
+        db.put(u.getId(), u);
     }
 
     @Override
     public List getAll() {
-        return new ArrayList<>(db.values());
+        LOG.info("GET: USER DAO SIZE ----" + db.size() + " map " + db.hashCode());
+        List<User> users = new ArrayList<>(db.values());
+        LOG.info("GET: USER DAO SIZE ----" + db.size() + " map " + db.hashCode());
+        return users;
     }
 
     @Override
@@ -46,7 +43,9 @@ public class UserDao implements DaoInterface2<User> {
 
     @Override
     public void create(User u) {
+        LOG.info("Attempt to create user vs ID: ----" + u.getId());
         db.put(u.getId(), u);
+        LOG.info("map SIZE: " + db.size() + "--hash " + db.hashCode());
     }
 
 

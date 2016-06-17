@@ -4,9 +4,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-/**
- * Created by user1 on 17.06.2016.
- */
 public interface ResourceInterface<T> {
     @GET
     @Produces("application/xml")
