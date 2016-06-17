@@ -1,4 +1,4 @@
-package example;
+package example.oleg.beans;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;

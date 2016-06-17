@@ -1,57 +1,60 @@
-package example;
+package example.oleg.res;
 
 
+
+import example.oleg.beans.Event;
+import example.oleg.dao.EventDao;
 
 import javax.inject.Inject;
-import javax.naming.NamingException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
+import java.io.File;
 import java.net.URI;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * Created by user1 on 09.06.2016.
  */
-@Path("/event")
+
 @Produces("text/plain")
-public class EventResource {
+public class EventResource implements ResourceInterface<Event>{
 
 
     @Inject
     private EventDao eventDao;
 
-    @GET
-    @Produces("application/xml")
-    public List<Event> getAllEvents() {
+
+    public List<Event> getAll() {
 
         List<Event> records = (eventDao.getAll());
         return records;
     }
 
-    @GET
-    @Path("{id}")
-    @Produces("application/xml")
-    public Event getSingleEvent(@PathParam("id") int id) {
-        Event e = eventDao.getEvent(id).get();
+
+    public Event getOne(int id) {
+        Event e = eventDao.getOne(id).get();
         return e;
     }
-    @POST
-    @Consumes("application/xml")
-    public Response insertEvent(Event t)  {
+
+    public Response insert(Event t)  {
         eventDao.create(t);
         URI loc = UriBuilder.fromResource(EventResource.class).path("{id}").build(t.getId());
         return Response.created(loc).build();
     }
 
-    @DELETE
-    @Path("{id}")
-    public void deleteEvent(@PathParam("id") int id) {
+
+    public void delete(int id) {
         eventDao.delete(id);
 
+    }
+
+    @GET
+    @Path("/db")
+    @Produces("text/plain")
+    public File getDbFile(){
+        return new File("D:\\jpa\\rest_jpa_example\\src\\main\\resources\\test.db");
     }
 
 

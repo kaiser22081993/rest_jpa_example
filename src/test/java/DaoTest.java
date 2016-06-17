@@ -1,22 +1,17 @@
-import example.Event;
-import example.EventDao;
+import example.oleg.beans.Event;
+import example.oleg.dao.EventDao;
 import javassist.NotFoundException;
-import org.junit.Assert;
-import org.junit.Test;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
 
 /**
  * Created by user1 on 09.06.2016.
  */
 
 public class DaoTest {
-    @Test
+
     public void crudTest() throws NotFoundException {
         EventDao dao = new EventDao();
 
@@ -28,14 +23,14 @@ public class DaoTest {
         e.setDesc("d2");
         dao.create(e);
 
-        Optional<Event> event = dao.getEvent(2);
+        Optional<Event> event = dao.getOne(2);
 
         event.orElseThrow(()-> new NotFoundException("Event not found"));
 
         dao.delete(e.getId());
 
     }
-    @Test
+
     public void hibernateFuncTest(){
         EntityManager em = Persistence.createEntityManagerFactory("Tix").createEntityManager();
         Event e = em.find(Event.class,1);

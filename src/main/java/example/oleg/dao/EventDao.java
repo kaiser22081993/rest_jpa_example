@@ -1,8 +1,8 @@
-package example;
+package example.oleg.dao;
 
 
 
-import org.hibernate.Session;
+import example.oleg.beans.Event;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -15,23 +15,27 @@ import java.util.logging.Logger;
 
 
 @ApplicationScoped
-public class EventDao {
+public class EventDao implements DaoInterface<Event> {
 
     private EntityManager manager;
     private Logger LOGGER = Logger.getLogger(EventDao.class.getName());
 
-    public EventDao(){
+
+  /*  public EventDao(){
        init();
-    }
+    }*/
+    @Override
+    @PostConstruct
     public void init(){
         manager = Persistence.createEntityManagerFactory("Tix").createEntityManager();
     }
-
+    @Override
     public List getAll(){
 
         return (manager.createQuery("select e from Event e").getResultList());
     }
-    public Optional<Event> getEvent(int id){
+    @Override
+    public Optional<Event> getOne(int id){
         Event e = manager.find(Event.class,id);
         LOGGER.info("get: " + e);
         return Optional.ofNullable(e);
@@ -43,6 +47,7 @@ public class EventDao {
                 .getResultList();
         return events.size() > 0;
     }
+    @Override
     public void create(Event e){
         Objects.requireNonNull(e);
         if(contains(e)){
@@ -54,7 +59,7 @@ public class EventDao {
         LOGGER.info("created: " + e);
 
     }
-
+    @Override
     public void delete(int id) {
         manager.getTransaction().begin();
         manager.remove(manager.find(Event.class,id));
