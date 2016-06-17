@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 
 @ApplicationScoped
-public class EventDao implements DaoInterface<Event> {
+public class EventDao implements DaoInterface2<Event> {
 
     private EntityManager manager;
     private Logger LOGGER = Logger.getLogger(EventDao.class.getName());

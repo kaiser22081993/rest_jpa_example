@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by user1 on 17.06.2016.
  */
 @ApplicationScoped
-public class UserDao implements DaoInterface<User> {
+public class UserDao implements DaoInterface2<User> {
 
     private ConcurrentHashMap<Integer, User> db;
     private AtomicInteger countId;
